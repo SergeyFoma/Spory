@@ -1,0 +1,7 @@
+python -Xutf8 manage.py dumpdata --indent=2 plumber.Mashine -o fixtures/plumber_mashine.json
+python -Xutf8 manage.py dumpdata --indent=2 plumber.Questions > fixtures/plumber_questions.json
+python -Xutf8 dumpdata --indent=2 > db.json
+
+------Запись в базу----------
+python manage.py loaddata fixtures/plumber_mashine.json > plumber_mashine
+python manage.py loaddata db.json
