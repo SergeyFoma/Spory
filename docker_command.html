@@ -1,2 +1,28 @@
-docker
-docker version
+docker - PowerShell
+docker version - PowerShell
+docker pull okteto/hello-world - скачиваем образ
+docker images - проверяем существующие образы
+docker run okteto/hello-world - Создаем контейнер
+docker ps -a - выовд всех контейнеров
+docker ps - выводит только запущенные контейнеры
+docker run python:3.12-alpine3.20 - устанавливаем python и его версию сборки
+docker run --name hw okteto/hello-world - запускаем контейнер и присваиваем ему имя hw
+docker start hw - запуск существующего контейнера по имени или идентификатору в фоне
+docker start -i hw - запуск контейнера с отображением в терминале интерактивный режим
+docker stop hw - остановка контейнера
+docker kill hw - убить контейнер если stop не срабатывает
+docker run -i -t python:3.12-alpine3.20 - запуск python в интерактивном режиме флаг -t это удаленное взаимодействие с запущенным контейнером
+docker rm 88f6268f8bed - удаление контейнера по идентификатору
+docker rm hw - удаление контейнера по имени
+docker container prune - удаляет все контейнеры
+docker rmi python:3.12-alpine3.20 - удаление образов
+docker rmi okteto/hello-world:latest
+docker rmi okteto/hello-world
+Образ не удалиться если он связан с контейнером
+
+docker run --rm hello-world - создает и сразу удаляет контейнер на основе образа
+
+
+
+
+
