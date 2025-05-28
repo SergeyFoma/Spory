@@ -7,3 +7,14 @@ cd ~ — переход в домашнюю директорию текущег�
 cd .. — переход на один уровень вверх в иерархии файловой системы;
 cd folder_name — переход в выбранную папку;
 mkdir folder_name — создать папку с указанным именем.
+D:
+pip install --upgrade pip
+pip install django==4.2
+python -m venv venv
+venv\Scripts\activate
+django-admin.exe startproject <myblog> .
+python manage.py startapp <blog>
+python manage.py makemigrations
+python manage.py migrate
+python manage.py createsuperuser
+python manage.py runserver
