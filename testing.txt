@@ -1,0 +1,5 @@
+python manage.py test women #тестирруется приложение women
+python manage.py test . #тестируется весь проект где есть тесты
+python manage.py test women.tests.GetPagestTestCase #тестируем наш конкретный класс
+python manage.py test women.tests.GetPagestTestCas.test_case1 #выполняем определённый тест в классе
+
