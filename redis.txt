@@ -1,0 +1,42 @@
+----------cmd-------------
+wsl --install #устанавливаем ubuntu
+
+#если ubuntu уже установлен, то запускаем из меню пуск
+
+sudo apt update
+sudo apt install redis-server
+sudo service redis-server start
+redis-cli #чтобы проверить запущен ли redis-server
+ping #сервер ответит PONG
+sudo service redis-server stop
+
+pip install redis
+pip install hiredis
+
+-----------settings.py----------
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.dummy.DummyCache",#заглушка для работы кеша её закоментить
+        "BACKEND": "django.core.cache.backends.redis.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379",
+    }
+}
+
+-----------Кэш для каждого сайта------------
+MIDDLEWARE = [
+    "django.middleware.cache.UpdateCacheMiddleware",
+    "django.middleware.common.CommonMiddleware",
+    "django.middleware.cache.FetchFromCacheMiddleware",
+]
+
+---------cashe views in urls.py---------------
+
+from django.views.decorators.cache import cache_page
+
+path('',cache_page(60 * 15)(views.Index.as_view()), name='index'),
+
+---------cashe in template------------
+{% load cache %}
+{% cache 500 sidebar %}
+    .. sidebar ..
+{% endcache %}
