@@ -1,0 +1,25 @@
+-------------Agregations functions--------------
+Count, Sum, Avg, Max, Min
+
+from django.db.models import Count, Sum, Avg, Max, Min
+Husband.objects.aggregate(Min("age))
+Husband.objects.aggregate(Min("age"), Max("age"))
+
+Women.objects.filter(pk__gt=2).aggregate(res=Count("cat_id"))
+
+Women.objects.all().values("title","cat_id")
+Women.objects.values("title","cat_id")
+Women.objects.values("title","cat_id").get(pk=1)
+
+-------------------https--------------------
+C:\Windows\System32\drivers\etc\hosts
+127.0.0.1       localhost
+127.0.0.1       test-online.ru
+В командной строке проверяем - ping test-online.ru
+В settings.py - ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'test-online.ru']
+
+django extensions
+pip install Werkzeug
+pip install pyOpenSSL
+python manage.py runserver_plus --cert-file cert.crt
+

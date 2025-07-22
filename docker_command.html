@@ -22,7 +22,50 @@ docker rmi okteto/hello-world
 
 docker run --rm hello-world - создает и сразу удаляет контейнер на основе образа
 
+----------------сборка своего образа-------------
 
+docker pull python:3.12.10-alpine3.21 
+ подготовка Dockerfile 
+docker build . -t myapp:0.1
+docker run -it myapp:0.1 - создание и запуск контейнера из образа в терминале в интерактивном режиме
+docker start -i name-container -при запуске контейнера пишем только флаг -i
+
+RUN pip install numpy
+RUN pip install --no-cashe-dir numpy  - загрузка без кеша чтобы не забивать память
+
+Вынесем все библиотеки которые надо установить в requirements.txt 
+Затем изменим dockerfile
+
+docker run --name my6 -d myapp:0.4 - -d запуск в фоновом режиме
+docker stats
+
+docker logs my5 - вывод работы контейнера
+docker builder prune -удаляем неиспользуемый кеш для очистки 
+docker builder prune -a -удаляем весь кеш для очистки памяти
+
+docker exec myapp:0.12 pip install matplotlib - устаналивается в работающий контейнер
+docker commit my:03 m03-1
+
+docker system prune - удаляем все контейнеры образы и кеш
+docker system prune -a
+
+docker ps -aq - получаем идентификаторы контейнеров
+docker ps -aq -f status=exited - получим id только не работающих контейнеров -f это фильтр
+docker ps -aq -f status=running
+docker ps -aq -f status=paused
+docker ps -aq -f status=created - контейнеры созданы но не запущенные
+docker ps -aq -f status=restarting - перезапущены
+docker stop $(docker ps -q) - увидим id остановленных 
+docker stop $(docker ps -qf status=running) - останавливаем запущенные
+docker start $(docker ps -qf status=exited) -запуск остановленных контейнеров
+docker pause $(docker ps -q) - ставим на паузу запущенные контейнеры и получаем их id
+docker unpause $(docker ps -qf status=paused) - снимаем с паузы
+docker rm $(docker ps -qf status=exited) - удаляем остановленные контейнеры
+docker rm $(docker stop $(docker ps -q)) - остановит выведет id и удалит контейнеры
+docker images -aq - просмотр образов
+docker images -f dangling=True - просмотр неиспользуемых образов NAN
+docker rmi $(docker images -qf dangling=True) удаление неиспользуемых образов NAN 
+docker rmi $(docker images -aq)
 
 
 
