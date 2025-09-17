@@ -1,0 +1,87 @@
+Виртуальный сервер «Pleasant Leonora» успешно создан
+
+IP-адрес:	31.129.111.50
+Имя пользователя:	root
+Способ авторизации:	Password
+OC:	Ubuntu 24.04
+Пароль:	4cvSGr*rZPHY
+Тариф "Simple"
+ Стоимость в день:	 7 руб.
+ Стоимость в месяц:	 210 руб.
+ 
+
+ 
+
+Кол-во ядер:
+1SSD:
+10 ГбПамять:
+1 Гб
+ 
+
+ 
+
+Инструкцию по работе с панелью управления VPS вы можете посмотреть в разделе Руководство по работе с VPS на нашем сайте.
+
+ 
+
+Вы всегда можете обратиться в нашу техническую поддержку, и мы постараемся помочь.
+
+Сайт:	https://beget.com
+E-mail:	support@beget.com
+Telegram:	@begetbot
+Skype:	добавить (только чат)
+ 
+Телефон:	8 (800) 700-06-08
+(бесплатно по России)
+0 (800) 802-192
+(бесплатно по Украине)
+------------------------------------------------------
+https://beget.com/ru/kb/how-to/web-apps/python#ustanovka-i-nastroyka-django
+https://beget.com/ru/kb/how-to/web-apps/obshhie-svedeniya-po-ustanovke-prilozhenij-virtualnoe-okruzhenie-docker#
+
+Телеграм-канал Django: https://t.me/django_selfedu
+
+Beget: https://beget.com
+
+PuTTY: https://www.chiark.greenend.org.uk/~sgtatham/putty/latest.html
+
+Инструкция по настройке: https://beget.com/ru/kb/how-to/vps/razvertyvanie-django-s-pomoshchyu-nginx-postgresql-i-gunicorn
+
+-------------------------------------------------------------------
+            Command
+
+sudo apt update
+sudo apt install python3-pip python3-dev python3-venv libpq-dev postgresql postgresql-contrib nginx
+sudo apt install build-essential libpython3-dev  #компилятор
+
+-------------Создание базы данных и пользователя PostgreSQL----------------
+sudo -u postgres psql   #запуск консоли postgress
+
+CREATE DATABASE exam_db;
+CREATE USER exam WITH PASSWORD '11111qqqqq';
+
+ALTER ROLE exam SET client_encoding TO 'utf8';
+ALTER ROLE exam SET default_transaction_isolation TO 'read committed';
+ALTER ROLE exam SET timezone TO 'UTC';
+
+GRANT ALL PRIVILEGES ON DATABASE exam_db TO exam;
+ALTER DATABASE exam_db OWNER TO exam;
+
+Для выхода из консоли PostgreSQL введите команду: \q
+------------------------------------------------------------------
+  В PuTTY
+
+  cd /var/www
+  mkdir myproject
+  ----------------------------------
+  в vscode создаём requirements.txt
+  pip freeze > requirements.txt
+
+  ----Зипуем проект и загружаем на beget--------
+  cd myproject
+  python3 -m venv venv
+
+  source venv/bin/activate
+  pip list 
+  pip install gunicorn psycopg2-binary
+  pip install -r requirements.txt
