@@ -26,3 +26,30 @@ from drf.views import WomenAPIView
 urlpatterns=[
     path('api/v1/womenlist/', WomenAPIView.as_view())
 ]
+
+----------классы представлений------
+CreateAPIView - создание данных по POST - запросу
+ListAPIView - чтение списка данных по GET - запросу
+RetrieveAPIView - чтение конкретных данных(записи)по GET - запросу
+DestroyAPIView - удаление данных(записи)по DELETE - запросу
+UpdateAPIView - изменение записи по PUT или PATCH - запросу
+ListCreateAPIView - для чтения(по GET запросу)и создания списка данных по POST запросу
+RetrieveUpdateAPIView - чтение и изменение отдельной записи(GET и POST запрос)
+RetrieveDestroyAPIView - чтение(GET-запрос)и удаление(DELETE запрос)отдельной записи
+RetrieveUpdateDestroyAPIView - чтение, изменение и добавление отдельной записи(GET, PUT, PATCH, DELETE запросы)
+
+------------ограничения permissions------------
+AllowAny - полный доступ
+IsAuthenticated - только для авторизованных пользователей
+IsAdminUser - только для администраторов
+IsAuthenticatedOrReadOnly - только для авторизованных или всем для чтения
+
+-----------Авторизация и аутентификация--------------
+Session-based authentication - аутентификация на основе сессий и cookies
+Token-based - аутентификация на основе токенов
+JSON Web Token (JWT) - аутентификация на основе JWT-токенов
+Django REST framework OAuth - Авторизация через соц.сети
+
+                Token-based authentication
+обычная аутентификация на основе токенов (библиотека Djoser)
+JWT-токены(библиотека Simple JWT)
