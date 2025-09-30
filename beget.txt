@@ -9,7 +9,7 @@ OC:	Ubuntu 24.04
  Стоимость в день:	 7 руб.
  Стоимость в месяц:	 210 руб.
  
-
+(ls -la ~/exam | grep sock)
  
 
 Кол-во ядер:
@@ -18,7 +18,8 @@ OC:	Ubuntu 24.04
 1 Гб
  
 
- 
+cd /var/www/myproject
+source venv/bin/activate
 
 Инструкцию по работе с панелью управления VPS вы можете посмотреть в разделе Руководство по работе с VPS на нашем сайте.
 
@@ -85,3 +86,62 @@ ALTER DATABASE exam_db OWNER TO exam;
   pip list 
   pip install gunicorn psycopg2-binary
   pip install -r requirements.txt
+  --------------------------------------------------
+
+gunicorn --bind 0.0.0.0:8000 exam.wsgi
+gunicorn --bind 0.0.0.0:8000 exam.wsgi:application
+-----------------------------------------------------------------
+[Unit]
+Description=gunicorn daemon
+After=network.target
+
+[Service]
+User=root
+Group=www-data
+WorkingDirectory=/var/www/myproject
+ExecStart=/var/www/myproject/venv/bin/gunicorn --access-logfile - --workers 3 --bind unix:/var/www/myproject/exam.sock exam.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
+------------------------------------------------------------
+:wq сохраняем файл
+-------------------------
+deactivate  выходим из окружения venv
+-----------------------------
+      Njinx
+
+server {
+    listen 80;
+    server_name tests-on.ru *.tests-on.ru;
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location /static/ {
+        root /var/www/venv/myproject;
+    }
+    location /media/ {
+        root /var/www/venv/myproject;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/var/www/myproject/exam.sock;
+    }
+}
+
+------------------------
+sudo systemctl restart nginx
+sudo systemctl restart gunicorn
+ls -la ~/myproject | grep sock
+namei -nom /var/www/myproject/exam.sock
+
+    подключаем статику
+sudo chmod 755 /var/www/myproject/static
+
+
+
+-----------------------------------------------------
+                Djino
+
+
+Логин: j12841701
+Пароль: Cc9f8TmeG

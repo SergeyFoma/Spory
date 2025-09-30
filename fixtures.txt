@@ -1,7 +1,16 @@
 python -Xutf8 manage.py dumpdata --indent=2 plumber.Mashine -o fixtures/plumber_mashine.json
 python -Xutf8 manage.py dumpdata --indent=2 plumber.Questions > fixtures/plumber_questions.json
+python -Xutf8 manage.py dumpdata --indent=2 plumber.Answers > fixtures/plumber_answers.json
 python -Xutf8 manage.py dumpdata --indent=2 > db.json
 
+python -Xutf8 manage.py dumpdata --indent=2 materials.CategoryMaterials -o fixtures/materials_categorymaterials.json
+python -Xutf8 manage.py dumpdata --indent=2 plumber.Professions -o fixtures/plumber_professions.json
+python -Xutf8 manage.py dumpdata --indent=2 materials.UploadedFile -o fixtures/materials_uploadedfile.json
 ------Запись в базу----------
-python manage.py loaddata fixtures/plumber_mashine.json > plumber_mashine
+python manage.py loaddata fixtures/materials_categorymaterials.json > materials_categorymaterials
+python manage.py loaddata fixtures/plumber_professions.json > plumber.Professions
+python3 manage.py loaddata fixtures/plumber_mashine.json > plumber.Mashine
+python3 manage.py loaddata fixtures/plumber_questions.json > plumber.Questions
+python3 manage.py loaddata fixtures/materials_uploadedfile.json > materials.UploadedFile
+loaddata fixtures/plumber_answers.json > plumber.Answers
 python manage.py loaddata db.json
