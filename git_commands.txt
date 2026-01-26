@@ -185,3 +185,10 @@ git reset HEAD templates/base.html
  git restore templates/base.html
 
  git reset --hard 3cb2068b9e3e0a1608f17a836b869c165336d603
+
+ ----------------------------------------------------------------------------
+
+ ----------------------Ветвление------------------------
+ https://selectel.ru/blog/tutorials/how-to-work-with-branches-in-git-git-branch/
+
+ 
